@@ -1,13 +1,23 @@
+# Arquivo: default_agent.py
+# Objetivo: criar um agente de pesquisa que usa DuckDuckGo e Valyu para
+# buscar contextos na web e em artigos científicos, respondendo de forma
+# concisa com fontes confiáveis. Requer variáveis no `.env`.
 from agno.agent import Agent
 from agno.models.google import Gemini
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.valyu import ValyuTools
 
+# Carrega variáveis de ambiente do arquivo `.env` (ex.: GOOGLE_API_KEY, VALYU_API_KEY)
 from dotenv import load_dotenv
 
 load_dotenv()
 
-
+# Configuração do agente:
+# - `id` e `name`: identificação e nome amigável
+# - `role`: descreve o objetivo do agente
+# - `instructions`: diretrizes para buscar e apresentar informações
+# - `model`: modelo Gemini a ser utilizado
+# - `tools`: ferramentas de busca (internet e artigos científicos)
 agent = Agent(
     id="Agente de pesquisa",
     name="Pesquisador DDG",
@@ -26,5 +36,5 @@ agent = Agent(
         ValyuTools(),
     ]
 )
-
+# Exemplo de uso: imprime uma resposta do agente para a pergunta informada
 print(agent.print_response("Quais os principais artigos sobre redes neurais?"))
